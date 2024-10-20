@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 
 # Function to clean the CSV file
 def clean_csv(input_file, output_file):
@@ -25,6 +26,8 @@ def clean_csv(input_file, output_file):
 
 # Example usage
 if __name__ == "__main__":
-    input_csv = r"C:\Users\Zoya\Documents\GitHub\scripting-and-testing\scripting-practice\mock-data\mock-data.csv"
-    output_csv = r"C:\Users\Zoya\Documents\GitHub\scripting-and-testing\scripting-practice\mock-data\mock-data-out.csv"
+    curPath = os.path.dirname(__file__)
+    print(curPath)
+    input_csv = os.path.join(curPath, "mock-data/mock-data.csv")
+    output_csv = os.path.join(curPath, "mock-data/mock-data-out.csv")
     clean_csv(input_csv, output_csv)

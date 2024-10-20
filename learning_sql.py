@@ -9,7 +9,8 @@ def create_connection(host_name, user_name, user_password, db_name):
             host=host_name,
             user=user_name,
             password=user_password,
-            database=db_name
+            database=db_name,
+            ssl_disabled=True
         )
         if connection.is_connected():
             print("Successfully connected to the database")
@@ -18,6 +19,15 @@ def create_connection(host_name, user_name, user_password, db_name):
         
     return connection
         
+def get_tables(connection):
+    query = "SHOW TABLES;"
+    cursor = connection.cursor()
+    cursor.execute(query)
+    
+    results = cursor.fetchall()
+    for row in results:
+        print(row)
+
 def get_all_users(connection):
     query = "SELECT * FROM users;"
     cursor = connection.cursor()
@@ -45,8 +55,6 @@ if __name__ == "__main__":
     conn = create_connection('localhost', 'root', 'Marshmallow78!', 'fake_db')
     
     # some easy queries to get to know how to work with this
+    get_tables(conn)
     get_all_users(conn) 
-    get_orders_by_user(conn, 1)
-    update_user_status(conn, 3, 1)
-    get_all_users(conn)
-    update_user_status(conn, 3, 0)
+    get_orders_by_user(conn, 2)

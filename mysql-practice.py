@@ -8,7 +8,8 @@ def connect(host_name, user_name, password, db_name):
             host = host_name,
             user = user_name,
             password = password,
-            database = db_name
+            database = db_name,
+            ssl_disabled=True
         )
     except Error as e:
         print(e)
